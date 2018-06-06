@@ -9,6 +9,10 @@
 <link href="css/css.css" rel="stylesheet">
 <link href="css/chosen.css" rel="stylesheet">
 <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script src="js/jQueryDistpicker20160621/distpicker.data.js"></script>
+<script src="js/jQueryDistpicker20160621/distpicker.js"></script>
 <!--[if lt IE 9]>
     <link href="css/ie.css" rel="stylesheet" type="text/css" >
     <meta http-equiv="X-UA-Compatible" content="IE=8" >
@@ -17,6 +21,14 @@
 <link href="favicon.ico" rel="SHORTCUT ICON">
 <title>17素材·私厨 - 为你推荐遍布全球最新鲜，最与众不同的顶级生活方式</title>
 </head>
+<%
+    String mess=(String)session.getAttribute("message");
+    if("".equals(mess)||mess==null){}
+    else{%>
+<script type="text/javascript">
+    alert("<%=mess%>");
+</script>
+<%session.setAttribute("message", "");}%>
 <body>
 <div class="head">
   <div class="wrap clearfix">
@@ -52,7 +64,7 @@
   <div class="section fl">
     <div class="location tr"><a href="Dinner">参加的饭局</a><a href="Host">主办的饭局</a><a href="Release" class="current">发布饭局</a></div>
     <div class="Participate pd30">
-    <form id="addParty">
+    <form action="addParty" method="post">
       <table class="baseinfo participate-tab">
         <tr>
           <th>活动标题：</th>
@@ -64,10 +76,14 @@
           <td><input type="text" name="pmoney" id="pmoney" value="" class="baseipt" style="width:185px"> 人</td>
         </tr>
          <tr>
-          <th>报名人数：</th>
+          <th>最大报名人数：</th>
           <td><select data-placeholder="200" style="width:185px;" class="chosen-select-no-single" tabindex="9" id="pnumber" name="pnumber">
-              <option>2-8</option>
-              <option>9-15</option>
+              <option>请选择</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
             </select> 人</td>
         </tr>
         <tr>
@@ -75,24 +91,40 @@
           <td><input id="" class="Wdate" type="text" name="partyTime" id="partyTime" onfocus="WdatePicker({minDate:'%y-%M-{%d+1}',isShowClear:false,isShowToday:false,readOnly:true})"/>&nbsp;&nbsp;&nbsp;&nbsp;截至报名时间：<input id="" class="Wdate" type="text" name="endTime" id="endTime" onfocus="WdatePicker({minDate:'%y-%M-{%d+1}',isShowClear:false,isShowToday:false,readOnly:true})"/></td>
         </tr>
         <tr>
-          <th valign="top">活动标签：</th>
-          <td class="label-active">
-            <p class="mt10"><input type="text" name="tag" value="" id="tag" class="baseipt"> 多个标签请用“空格”分开</p>
-          </td>
+          <th valign="top">活动类型：</th>
+          <td><select data-placeholder="200" style="width:185px;" class="chosen-select-no-single" tabindex="9" id="type" name="type">
+              <option>请选择</option>
+              <option>早餐</option>
+              <option>午餐</option>
+              <option>晚餐</option>
+              <option>下午茶</option>
+              <option>宵夜</option>
+            </select></td>
+        </tr>
+        <tr>
+           <th>饭局地点：</th>
+          <td colspan="2"><div data-toggle="distpicker" >
+           <select data-province="${ user.uprovince}" name="province" id="province"></select>
+           <select data-city="${ user.ucity}" name="city" id="city"></select>
+           <select data-district="${ user.uarea}" name="uarea" id="uarea"></select>
+           </div>
+           </td>
+        <input type="hidden" id="inpprovince" name="inpprovince"/>
+        <input type="hidden" id="inpcity" name="inpcity"/>
+        <input type="hidden" id="inpuarea" name="inpuarea"/>
         </tr>
       </table>
       活动照片：
       <div class="photo clearfix">
         <div class="photo-control fl">
           <div class="active-photo img "><img id="ImgPr2"></div>
-          <p class="mt10 tc"><label class="btn-upfiles"><input type="file" name="photo" id="up2" />添加</label></p>
+          <p class="mt10 tc"><label class="btn-upfiles"><input type="file" name="pImg" id="up2" />添加</label></p>
         </div>
       </div>
       <p class="mt30">活动描述：</p>
-      <textarea name="" id="desc" cols="" rows="" class="area2"></textarea>
+      <textarea name="desc" id="desc" cols="" rows="" class="area2"></textarea>
       <div class="Release-submit">
-      
-        <p class="mt20"><button type="button" name="" onclick="$.submit()" value="" class="button btn-submit">提交</button><button type="button" name="" value="" class="button btn-reset">取消</button></p>
+        <p class="mt20"><button type="submit" value="" class="button btn-submit">提交</button><button type="button" name="" value="" class="button btn-reset">取消</button></p>
       </div>
       </form>
     </div>
@@ -133,6 +165,16 @@
 
 <script src="js/chosen.jquery.js"></script>
 <script type="text/javascript">
+$.save=function(){
+	var s = $("#ImgPr").attr("src");
+	$("#img_src").attr("value",s);
+	var pro = $("#province").attr("value");
+	$("#inpprovince").attr("value",pro);
+	var cit = $("#city").attr("value");
+	$("#inpcity").attr("value",cit);
+	var are = $("#uarea").attr("value");
+	$("#inpuarea").attr("value",are);
+}
 $.submit=function()
 {   alert($("#addParty").serialize());
 

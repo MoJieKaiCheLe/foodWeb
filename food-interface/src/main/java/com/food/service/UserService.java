@@ -1,6 +1,5 @@
 package com.food.service;
 
-import javax.servlet.http.HttpServletRequest;
 
 import com.food.pojo.User;
 

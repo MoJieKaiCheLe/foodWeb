@@ -9,11 +9,10 @@
 <link href="css/css.css" rel="stylesheet">
 <link href="css/chosen.css" rel="stylesheet">
 <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
-
-      <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
-	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
-	<script src="js/jQueryDistpicker20160621/distpicker.data.js"></script>
-	  <script src="js/jQueryDistpicker20160621/distpicker.js"></script>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+<script src="js/jQueryDistpicker20160621/distpicker.data.js"></script>
+<script src="js/jQueryDistpicker20160621/distpicker.js"></script>
 <!--[if lt IE 9]>
     <link href="css/ie.css" rel="stylesheet" type="text/css" >
     <meta http-equiv="X-UA-Compatible" content="IE=8" >

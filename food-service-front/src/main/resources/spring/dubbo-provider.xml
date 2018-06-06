@@ -34,6 +34,9 @@
 	<dubbo:protocol port="20880" name="dubbo"/>
 	<!-- 4： 暴露实现类-->
 	<dubbo:service interface="com.food.service.UserService" ref="userService" registry="N/A"/>
-	<bean id="userService" class="com.food.service.impl.UserServiceImpl" />  
+	<bean id="userService" class="com.food.service.impl.UserServiceImpl" />
+	
+	<dubbo:service interface="com.food.service.PartyService" ref="partyService" registry="N/A"/>
+	<bean id="partyService" class="com.food.service.impl.PartyServiceImpl" />  
 	
 </beans>
